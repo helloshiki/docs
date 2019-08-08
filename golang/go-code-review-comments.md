@@ -18,8 +18,8 @@ golangci-lint run dir1 dir2/... dir3/file1.go
 * golangci-lint安装方法: https://github.com/golangci/golangci-lint
 
 # Go官方编程规范
-https://github.com/golang/go/wiki/CodeReviewComments
-*Go官方编程规范(中文翻译,省略了很多细节)
+* https://github.com/golang/go/wiki/CodeReviewComments
+* Go官方编程规范(中文翻译,省略了很多细节)
 http://www.gonglin91.com/2018/03/30/go-code-review-comments/
 
 # Effective Go

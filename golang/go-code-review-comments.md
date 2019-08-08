@@ -23,9 +23,9 @@ https://github.com/golang/go/wiki/CodeReviewComments
 http://www.gonglin91.com/2018/03/30/go-code-review-comments/
 
 # Effective Go
-https://golang.org/doc/effective_go.html
+* https://golang.org/doc/effective_go.html
 * Effective Go(中文翻译)
 https://www.kancloud.cn/kancloud/effective/72204
 
 # 如何写出优雅的 Golang 代码
-https://draveness.me/golang-101
+* https://draveness.me/golang-101

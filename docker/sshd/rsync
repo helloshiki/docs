@@ -1,0 +1,7 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+cd `dirname $0`
+
+sshd_host=www.baidu.com
+/usr/bin/rsync -e "ssh -p 12580 -i ../forward/sk2" guest@$sshd_host:/data/ -rt

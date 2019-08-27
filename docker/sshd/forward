@@ -1,0 +1,24 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+program=`basename $0` 
+cd `dirname $0`
+logfile="log."$program".txt"
+
+sshd_host=www.baidu.com
+
+export AUTOSSH_POLL=60
+export AUTOSSH_FIRST_POLL=30
+export AUTOSSH_GATETIME=0
+export AUTOSSH_DEBUG=1
+
+autossh -M 0 -qT -N -L "0.0.0.0:43301:s1.hsn:22" \
+	-o ServerAliveInterval=15 -o ExitOnForwardFailure=yes -o BatchMode=yes -o StrictHostKeyChecking=no \
+	guest@$sshd_host -p 12334 >> $logfile
+
+#autossh -M 0 -qT -N -R "127.0.0.1:43352:172.38.5.253:8901" \
+#	-o ServerAliveInterval=15 -o ExitOnForwardFailure=yes -o BatchMode=yes -o StrictHostKeyChecking=no \
+#	guest@$sshd_host -p 12334 >> $logfile 2>&1
+
+
+# * * * * * flock -xn /tmp/myreverse.lock -c "/home/server/cronjob/forward/reverse" &

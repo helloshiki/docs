@@ -1,0 +1,52 @@
+#!/bin/bash
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+program=`basename $0` 
+cd `dirname $0`
+logfile="log."$program".txt"
+
+export AUTOSSH_POLL=60
+export AUTOSSH_FIRST_POLL=30
+export AUTOSSH_GATETIME=0
+export AUTOSSH_DEBUG=1
+export AUTOSSH_PIDFILE=/tmp/$program".pid"
+
+sshd_host=www.baidu.com
+your_url=https://www.baidu.com
+
+timestamp=`date +%s`
+flag=`curl -H "Cache-Control:no-cache" "$your_url?t=$timestamp" -s | head -1`
+[ "$flag" = "0" ] && exit 0
+
+echo `date` "start $*" >> $logfile
+
+check() {
+	while :; do 
+		sleep 10
+		count=0
+		for i in `seq 10`; do 
+			timestamp=`date +%s`
+			flag=`curl -H "Cache-Control:no-cache" "$your_url?t=$timestamp" -s | head -1`
+			[ "$flag" = "1" ] && break
+			[ "$flag" = "0" ] && {
+				((count++))
+			}
+			sleep 3
+		done
+		[ $count -gt 6 ] && {
+			kill `cat $AUTOSSH_PIDFILE`
+			exit 0
+		}
+	done
+}
+
+check &
+
+autossh -M 0 -qT -N -R "0.0.0.0:65022:172.38.5.137:22" \
+	-o ServerAliveInterval=15 -o ExitOnForwardFailure=yes -o BatchMode=yes -o StrictHostKeyChecking=no \
+	guest@$sshd_host -p 12334 >> $logfile 2>&1
+
+echo `date` "stop $*" >> $logfile
+wait 
+
+# * * * * * flock -xn /tmp/myreverse.lock -c "bash -c /home/server/cronjob/forward/reverse" &

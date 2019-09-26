@@ -6,6 +6,6 @@
 * [ssh正/反向代理](shell/forward)
 * [免密rsync](shell/rsync)
 * [远程ssh反向代理](shell/flag-reverse)
-
+* [ssh sock5代理](shell/ssh-sock5.md)
 # docker 
 * [sshd服务器](https://github.com/helloshiki/docker/tree/master/sshd)

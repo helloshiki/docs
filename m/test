@@ -5561,12 +5561,13 @@ var rules = [
 var lastRule = '';
 
 function FindProxyForURL(url, host) {
-    for (var i = 0; i < rules.length; i++) {
+    return 'SOCKS5 172.38.5.137:55555; DIRECT;';
+  /*  for (var i = 0; i < rules.length; i++) {
         ret = testHost(host, i);
         if (ret != undefined)
             return ret;
     }
-    return 'DIRECT';
+    return 'DIRECT';*/
 }
 
 function testHost(host, index) {

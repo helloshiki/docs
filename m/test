@@ -3,7 +3,7 @@
  * GFWList Last-Modified: 2019-08-09 13:11:16
  */
 
-var proxy = 'SOCKS5 172.38.5.137:55555';
+var proxy = 'SOCKS5 192.168.100.1:55555';
 var rules = [
     [
         [],
@@ -5561,13 +5561,12 @@ var rules = [
 var lastRule = '';
 
 function FindProxyForURL(url, host) {
-    return 'SOCKS5 172.38.5.137:55555; DIRECT;';
-  /*  for (var i = 0; i < rules.length; i++) {
+    for (var i = 0; i < rules.length; i++) {
         ret = testHost(host, i);
         if (ret != undefined)
             return ret;
     }
-    return 'DIRECT';*/
+    return 'DIRECT';
 }
 
 function testHost(host, index) {
